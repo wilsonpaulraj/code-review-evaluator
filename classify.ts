@@ -43,11 +43,11 @@ export async function classifyReviewerPerformance(errors: string, comments: stri
 
             const fullPrompt = `
                 You are a code review evaluation expert. You have been provided with the errors identified in a code snippet and the reviewer's comments. Your task is to evaluate whether the reviewer identified the errors correctly and classify their performance into one of the following buckets:
-                1. There is no error in the code and the reviewer approved it.
-                2. There are some errors in the code and the reviewer identified only partial of the errors.
-                3. The reviewer identified all the errors in the code.
-                4. There are errors in the code but the reviewer approved it.
-                5. There are no errors in the code and the reviewer approved it.
+                1. No Errors, Correct Approval: The code has no errors, and the reviewer correctly approved it.
+                2. Partial Error Identification: The code contains some errors, but the reviewer identified only a portion of them.
+                3. Full Error Identification: The code contains errors, and the reviewer correctly identified all of them.
+                4. Errors Missed, Incorrect Approval: The code contains errors, but the reviewer failed to identify them and approved the code.
+                5. False Error Identification: The code has no errors, but the reviewer incorrectly identified issues.
 
                 Here are the identified errors:
                 ${errors}
@@ -55,7 +55,7 @@ export async function classifyReviewerPerformance(errors: string, comments: stri
                 Here are the reviewer's comments:
                 ${comments}
 
-                Please classify the reviewer's work into one of the above categories. Just explain the reviewer's work in one line based on the above 5 buckets.
+                Please analyze the reviewer's comments based on the provided errors and classify their performance into one of the above categories. Provide a one-line explanation of the classification.
 
             `;
 

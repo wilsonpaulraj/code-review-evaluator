@@ -7,20 +7,19 @@ const CodeInput = () => {
   const [reviewerComments, setReviewerComments] = useState('');
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
-  const [file, setFile] = useState<File | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files[0]) {
       const file = files[0];
-      setFile(file);
       const reader = new FileReader();
       reader.onload = (event) => {
         if (event.target && typeof event.target.result === 'string') {
           setCode(event.target.result); // Set code content from the file
         }
       };
-      reader.readAsText(file); // Read the file as text
+      reader.readAsText(file);
+
     }
   };
 
